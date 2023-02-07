@@ -1,0 +1,8 @@
+{
+  "name": "eek-whales",
+  "version": "0.1.0",
+  "description": "a collection of JS/TS modules for functional programming",
+  "type": "module",
+  "author": "Rand Schneck <i@rasch.co>",
+  "license": "ISC"
+}
