@@ -1,2 +1,2 @@
 // isTruthy :: a -> Boolean
-export const isTruthy = (a: any) : boolean => !!a
+export const isTruthy = (a?: any) : boolean => !!a
