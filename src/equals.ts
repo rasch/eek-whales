@@ -11,7 +11,7 @@ export const equals = (a: any) => (b: any) : boolean => {
     return true
   }
 
-  if (isSetoid(a)) {
+  if (isSetoid(a) && isSameType(a)(b)) {
     return b.equals.call(b, a)
   }
 
