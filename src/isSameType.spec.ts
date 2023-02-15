@@ -30,6 +30,11 @@ test("isSameType", t => {
   )
 
   t.notOk(
+    isSameType(null)(undefined),
+    "given null and undefined should return false"
+  )
+
+  t.notOk(
     isSameType(function* () { yield 1 })(function () { return 1 }),
     "given a generator function and a function should return false"
   )
@@ -46,5 +51,5 @@ test("isSameType", t => {
     "given an anonymous function and a named function should return true"
   )
 
-  t.plan(9)
+  t.plan(10)
 })
