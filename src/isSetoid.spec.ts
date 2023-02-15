@@ -19,5 +19,15 @@ test("isSetoid", t => {
     "given an oject with an equals method (duck typing) should return true"
   )
 
-  t.plan(3)
+  const flSetoid = {
+    value: 42,
+    "fantasy-land/equals": (x: { value: any }) => x.value === setoid.value
+  }
+
+  t.ok(
+    isSetoid(flSetoid),
+    "given an oject with a 'fantasy-land/equals' method should return true"
+  )
+
+  t.plan(4)
 })
