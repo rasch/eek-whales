@@ -4,5 +4,8 @@
   "description": "a collection of JS/TS modules for functional programming",
   "type": "module",
   "author": "Rand Schneck <i@rasch.co>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.13.0"
+  }
 }
