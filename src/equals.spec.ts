@@ -916,5 +916,20 @@ test("equals Setoid", t => {
     "false given Setoids that are NOT equal based on their `equals` method"
   )
 
-  t.plan(8)
+  const FantasyLandSetoid = (n: number) => ({
+    value: n,
+    "fantasy-land/equals": (x: any) => n === x.value
+  })
+
+  t.ok(
+    equals(FantasyLandSetoid(42))(FantasyLandSetoid(42)),
+    "true given Setoids that are equal based on their `fantasy-land/equals` method"
+  )
+
+  t.notOk(
+    equals(FantasyLandSetoid(42))(FantasyLandSetoid(21)),
+    "false given Setoids that are NOT equal based on their `fantasy-land/equals` method"
+  )
+
+  t.plan(10)
 })

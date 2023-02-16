@@ -37,12 +37,14 @@
 
 ```txt
 equals :: a -> b -> Boolean
+equals :: Setoid a => a -> a -> Boolean
 ```
 
 The `equals` function is useful for deep equality comparisons or for
-comparing two values of the `Setoid` type. Returns `true` given two
-values that are deeply equal and `false` if they are not. Primitive
-values are checked using the [isSame](#issame) module.
+comparing two values of the [`Setoid`](#issetoid) type. Returns `true`
+given two values that are deeply equal and `false` otherwise. Primitive
+values are checked using the [isSame](#issame) module. `Setoids` are
+compared using their `equals` or `fantasy-land/equals` methods.
 
 ```typescript
 import { equals } from "eek-whales"

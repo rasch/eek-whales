@@ -1,4 +1,5 @@
 import { isDate } from "./isDate.js"
+import { isFunction } from "./isFunction.js"
 import { isIterable } from "./isIterable.js"
 import { isSame } from "./isSame.js"
 import { isSameType } from "./isSameType.js"
@@ -12,7 +13,9 @@ export const equals = (a: any) => (b: any) : boolean => {
   }
 
   if (isSetoid(a) && isSameType(a)(b)) {
-    return b.equals.call(b, a)
+    return isFunction(b["fantasy-land/equals"])
+      ? b["fantasy-land/equals"].call(b, a)
+      : b.equals.call(b, a)
   }
 
   if (
