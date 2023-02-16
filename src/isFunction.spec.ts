@@ -9,6 +9,11 @@ test("isFunction", t => {
     "given an anonymous function should return true"
   )
 
+  t.ok(
+    isFunction(function*() { yield "a" }),
+    "given a generator function should return true"
+  )
+
   const id = (x: any) => x
 
   t.ok(
@@ -45,5 +50,5 @@ test("isFunction", t => {
     "given an empty array should return false"
   )
 
-  t.plan(8)
+  t.plan(9)
 })
