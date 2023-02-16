@@ -145,10 +145,49 @@ isSameType({})([])            // => false
 isTruthy :: a -> Boolean
 ```
 
+`isTruthy` returns the result of converting the given parameter into a
+boolean.
+
+```typescript
+import { isTruthy } from "eek-whales"
+
+isTruthy(true)       // => true
+isTruthy({})         // => true
+isTruthy([])         // => true
+isTruthy(42)         // => true
+isTruthy("0")        // => true
+isTruthy(new Date()) // => true
+isTruthy(Infinity)   // => true
+isTruthy(false)      // => false
+isTruthy(0)          // => false
+isTruthy(-0)         // => false
+isTruthy(0n)         // => false
+isTruthy("")         // => false
+isTruthy(null)       // => false
+isTruthy(undefined)  // => false
+isTruthy(NaN)        // => false
+```
+
 ### isNil
 
 ```txt
 isNil :: a -> Boolean
+```
+
+`isNil` returns true given one of `null`, `undefined`, or `NaN`. All
+other values return false.
+
+```typescript
+import { isNil } from "eek-whales"
+
+isNil(null)      // => true
+isNil(undefined) // => true
+isNil(NaN)       // => true
+
+isNil("")        // => false
+isNil(0)         // => false
+isNil(42)        // => false
+isNil([])        // => false
 ```
 
 ### isFunction
@@ -157,10 +196,39 @@ isNil :: a -> Boolean
 isFunction :: a -> Boolean
 ```
 
+`isFunction` returns true given a function or generator function. All
+other values return false.
+
+```typescript
+import { isFunction } from "eek-whales"
+
+const generator = function*() { yield "a"}
+const fn = x => x
+
+isFunction(fn)                        // => true
+isFunction(x => x)                    // => true
+isFunction(generator)                 // => true
+isFunction(function*() { yield "a" }) // => true
+isFunction([])                        // => false
+```
+
 ### isDate
 
 ```txt
 isDate :: a -> Boolean
+```
+
+`isDate` returns true given a date object. All other values return
+false.
+
+```typescript
+import { isDate } from "eek-whales"
+
+isDate(new Date())            // => true
+isDate(new Date(2023, 1, 1))  // => true
+isDate(Date.now())            // => false
+isDate()                      // => false
+isDate("Wed Feb 01 2023 00:00:00 GMT-0500 (Eastern Standard Time)") // => false
 ```
 
 ### isIterable
@@ -169,10 +237,67 @@ isDate :: a -> Boolean
 isIterable :: a -> Boolean
 ```
 
+`isIterable` returns true given a value with a `Symbol.iterator` static
+method.
+
+```typescript
+import { isIterable } from "eek-whales"
+
+isIterable("hello world") // => true
+isIterable([1, 2, 3])     // => true
+isIterable(new Uint8Array([10, 20, 30, 40, 50]))       // => true
+isIterable(new Map([["a", 1], ["b", 10], ["c", 100]])) // => true
+isIterable(new Set([0, 1, 1, 2, 3, 5, 8, 13, 21, 34])) // => true
+isIterable(42) // => false
+isIterable({}) // => false
+isIterable()   // => false
+
+const customIterable = {
+  *[Symbol.iterator]() {
+    yield 1
+    yield 2
+    yield 3
+  }
+}
+
+isIterable(customIterable) // => true
+```
+
 ### isSetoid
 
 ```txt
 isSetoid :: a -> Boolean
+```
+
+`isSetoid` returns `true` given an object/class with an `equals` or
+`fantasy-land/equals` method. All other values return `false`. This
+module relies on duck typing to check if a value is a Setoid. It does
+**NOT** validate any of the required algebraic laws (reflexivity,
+symmetry, and transitivity) as laid out in the [Fantasy Land
+Specification]. Validating the laws is not possible without knowing the
+type of value that will be passed to the `equals` method in advance and
+that will vary depending on the Setoid implementation.
+
+```typescript
+import { isSetoid } from "eek-whales"
+import { Min, Max } from "eek-whales"
+
+isSetoid(Min) // => true
+isSetoid(Max) // => true
+isSetoid("hello world") // => false
+
+interface NumericSetoid {
+  value: number
+  equals: (n: NumericSetoid) => boolean
+}
+
+const mySetoid = (x: number) => ({
+  value: x,
+  equals: (y: NumericSetoid) => x === y.value
+})
+
+isSetoid(mySetoid(42)) // => true
+isSetoid(mySetoid)     // => false
 ```
 
 ## Showable
@@ -183,8 +308,44 @@ isSetoid :: a -> Boolean
 inspect :: a -> String
 ```
 
+`inspect` returns a string representation of the given value. Useful
+as a helper function for creating `toString` methods for ADTs.
+
+```typescript
+import { inspect } from "eek-whales"
+
+inspect("hello world")        // => "hello world"
+inspect(42)                   // => "42"
+inspect([1, 2, 3])            // => "[1, 2, 3]"
+inspect(undefined)            // => "undefined"
+inspect((x) => x)             // => "(x) => x"
+inspect(new TypeError("FOO")) // => "TypeError: BAR"
+```
+
 ### nodeInspect
 
 ```txt
 nodeInspect :: Symbol
 ```
+
+Using `nodeInspect` in the ADTs allows for defining custom `console.log`
+output for Node.js without the need to `import` the `util` module. This
+makes it unnecessary to verify a Node.js environment.
+
+```typescript
+import { inspect, nodeInspect } from "eek-whales"
+
+const Identity = x => ({
+  // ...
+
+  toString() {
+    return `Identity(${inspect(x)})`
+  },
+
+  [nodeInspect]() {
+    return this.toString()
+  }
+})
+```
+
+[Fantasy Land Specification]: https://github.com/fantasyland/fantasy-land
