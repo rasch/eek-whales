@@ -40,7 +40,9 @@ equals :: a -> b -> Boolean
 ```
 
 The `equals` function is useful for deep equality comparisons or for
-comparing two values of the `Setoid` type.
+comparing two values of the `Setoid` type. Returns `true` given two
+values that are deeply equal and `false` if they are not. Primitive
+values are checked using the [isSame](#issame) module.
 
 ```typescript
 import { equals } from "eek-whales"
@@ -73,11 +75,11 @@ word.
 ```typescript
 import { getType } from "eek-whales"
 
-getType("hello")    // => "String"
-getType([1, 2, 3])  // => "Array"
-getType(42)         // => "Number"
-getType(/^foo$/i)   // => "RegExp"
-getType(x => x)     // => "Function"
+getType("hello")            // => "String"
+getType([1, 2, 3])          // => "Array"
+getType(42)                 // => "Number"
+getType(/^foo$/i)           // => "RegExp"
+getType(<T>(x: T): T => x)  // => "Function"
 ```
 
 ### is
@@ -93,11 +95,11 @@ to be validated with.
 ```typescript
 import { is } from "eek-whales"
 
-is("String")("hello")   // => true
-is("String")(42)        // => false
-is("Array")([1, 2, 3])  // => true
-is("Array")({ a: 1 })   // => false
-is("Undefined")()       // => true
+is ("String") ("hello")   // => true
+is ("String") (42)        // => false
+is ("Array") ([1, 2, 3])  // => true
+is ("Array") ({ a: 1 })   // => false
+is ("Undefined") ()       // => true
 ```
 
 ## Predicate Functions
@@ -115,10 +117,10 @@ equal. It is equivalent to the JavaScript `Object.is` static method.
 ```typescript
 import { isSame } from "eek-whales"
 
-isSame (0) (0)   // => true
-isSame (0) (+0)  // => true
-isSame (0) (-0)  // => false
-isSame (-0) (+0) // => false
+isSame (0) (0)    // => true
+isSame (0) (+0)   // => true
+isSame (0) (-0)   // => false
+isSame (-0) (+0)  // => false
 ```
 
 ### isSameType
@@ -133,10 +135,10 @@ that represents if both parameters are of the same type.
 ```typescript
 import { isSameType } from "eek-whales"
 
-isSameType("hello")("world")  // => true
-isSameType(21)(42)            // => true
-isSameType(null)(undefined)   // => false
-isSameType({})([])            // => false
+isSameType ("hello") ("world")  // => true
+isSameType (21) (42)            // => true
+isSameType (null) (undefined)   // => false
+isSameType ({}) ([])            // => false
 ```
 
 ### isTruthy
@@ -151,21 +153,21 @@ boolean.
 ```typescript
 import { isTruthy } from "eek-whales"
 
-isTruthy(true)       // => true
-isTruthy({})         // => true
-isTruthy([])         // => true
-isTruthy(42)         // => true
-isTruthy("0")        // => true
-isTruthy(new Date()) // => true
-isTruthy(Infinity)   // => true
-isTruthy(false)      // => false
-isTruthy(0)          // => false
-isTruthy(-0)         // => false
-isTruthy(0n)         // => false
-isTruthy("")         // => false
-isTruthy(null)       // => false
-isTruthy(undefined)  // => false
-isTruthy(NaN)        // => false
+isTruthy(true)        // => true
+isTruthy({})          // => true
+isTruthy([])          // => true
+isTruthy(42)          // => true
+isTruthy("0")         // => true
+isTruthy(new Date())  // => true
+isTruthy(Infinity)    // => true
+isTruthy(false)       // => false
+isTruthy(0)           // => false
+isTruthy(-0)          // => false
+isTruthy(0n)          // => false
+isTruthy("")          // => false
+isTruthy(null)        // => false
+isTruthy(undefined)   // => false
+isTruthy(NaN)         // => false
 ```
 
 ### isNil
@@ -180,14 +182,13 @@ other values return false.
 ```typescript
 import { isNil } from "eek-whales"
 
-isNil(null)      // => true
-isNil(undefined) // => true
-isNil(NaN)       // => true
-
-isNil("")        // => false
-isNil(0)         // => false
-isNil(42)        // => false
-isNil([])        // => false
+isNil(null)       // => true
+isNil(undefined)  // => true
+isNil(NaN)        // => true
+isNil("")         // => false
+isNil(0)          // => false
+isNil(42)         // => false
+isNil([])         // => false
 ```
 
 ### isFunction
@@ -203,13 +204,13 @@ other values return false.
 import { isFunction } from "eek-whales"
 
 const generator = function*() { yield "a"}
-const fn = x => x
+const fn = <T>(x: T): T => x
 
-isFunction(fn)                        // => true
-isFunction(x => x)                    // => true
-isFunction(generator)                 // => true
-isFunction(function*() { yield "a" }) // => true
-isFunction([])                        // => false
+isFunction(fn)                         // => true
+isFunction(<T>(x: T): T => x)          // => true
+isFunction(generator)                  // => true
+isFunction(function*() { yield "a" })  // => true
+isFunction([])                         // => false
 ```
 
 ### isDate
@@ -243,14 +244,14 @@ method.
 ```typescript
 import { isIterable } from "eek-whales"
 
-isIterable("hello world") // => true
-isIterable([1, 2, 3])     // => true
-isIterable(new Uint8Array([10, 20, 30, 40, 50]))       // => true
-isIterable(new Map([["a", 1], ["b", 10], ["c", 100]])) // => true
-isIterable(new Set([0, 1, 1, 2, 3, 5, 8, 13, 21, 34])) // => true
-isIterable(42) // => false
-isIterable({}) // => false
-isIterable()   // => false
+isIterable("hello world")                               // => true
+isIterable([1, 2, 3])                                   // => true
+isIterable(new Uint8Array([10, 20, 30, 40, 50]))        // => true
+isIterable(new Map([["a", 1], ["b", 10], ["c", 100]]))  // => true
+isIterable(new Set([0, 1, 1, 2, 3, 5, 8, 13, 21, 34]))  // => true
+isIterable(42)                                          // => false
+isIterable({})                                          // => false
+isIterable()                                            // => false
 
 const customIterable = {
   *[Symbol.iterator]() {
@@ -260,7 +261,7 @@ const customIterable = {
   }
 }
 
-isIterable(customIterable) // => true
+isIterable(customIterable)  // => true
 ```
 
 ### isSetoid
@@ -282,9 +283,9 @@ that will vary depending on the Setoid implementation.
 import { isSetoid } from "eek-whales"
 import { Min, Max } from "eek-whales"
 
-isSetoid(Min) // => true
-isSetoid(Max) // => true
-isSetoid("hello world") // => false
+isSetoid(Min)            // => true
+isSetoid(Max)            // => true
+isSetoid("hello world")  // => false
 
 interface NumericSetoid {
   value: number
@@ -296,8 +297,8 @@ const mySetoid = (x: number) => ({
   equals: (y: NumericSetoid) => x === y.value
 })
 
-isSetoid(mySetoid(42)) // => true
-isSetoid(mySetoid)     // => false
+isSetoid(mySetoid(42))  // => true
+isSetoid(mySetoid)      // => false
 ```
 
 ## Showable
@@ -314,12 +315,12 @@ as a helper function for creating `toString` methods for ADTs.
 ```typescript
 import { inspect } from "eek-whales"
 
-inspect("hello world")        // => "hello world"
-inspect(42)                   // => "42"
-inspect([1, 2, 3])            // => "[1, 2, 3]"
-inspect(undefined)            // => "undefined"
-inspect((x) => x)             // => "(x) => x"
-inspect(new TypeError("FOO")) // => "TypeError: BAR"
+inspect("hello world")         // => "hello world"
+inspect(42)                    // => "42"
+inspect([1, 2, 3])             // => "[1, 2, 3]"
+inspect(undefined)             // => "undefined"
+inspect(<T>(x: T): T => x)     // => "(x) => x"
+inspect(new TypeError("FOO"))  // => "TypeError: FOO"
 ```
 
 ### nodeInspect
