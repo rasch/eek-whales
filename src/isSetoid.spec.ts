@@ -29,5 +29,20 @@ test("isSetoid", t => {
     "given an oject with a 'fantasy-land/equals' method should return true"
   )
 
-  t.plan(4)
+  interface NumericSetoid {
+    value: number
+    equals: (n: NumericSetoid) => boolean
+  }
+
+  const mySetoid = (x: number) => ({
+    value: x,
+    equals: (y: NumericSetoid) => x === y.value
+  })
+
+  t.ok(
+    isSetoid(mySetoid(42)),
+    "given an object with an equals method should return true"
+  )
+
+  t.plan(5)
 })
