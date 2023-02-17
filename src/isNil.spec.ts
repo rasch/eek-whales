@@ -14,7 +14,7 @@ test("isNil", t => {
     isNil([NaN, undefined, null]),
     "given an array with null, undefined, and NaN should return false"
   )
-  
+
   // everything else should return false
   t.notOk(isNil("hello"), "given a string should return false")
   t.notOk(isNil(""), "given an empty string should return false")

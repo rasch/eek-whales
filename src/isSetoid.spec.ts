@@ -9,7 +9,7 @@ test("isSetoid", t => {
     "given no parameters should return false"
   )
 
-  const setoid = { 
+  const setoid = {
     value: 42,
     equals(x: { value: any }) { return x.value === setoid.value }
   }
