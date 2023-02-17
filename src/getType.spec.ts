@@ -118,5 +118,47 @@ test("getType", t => {
     "given an arguments object should return the string 'Arguments'"
   )
 
-  t.plan(20)
+  const CustomType = {
+    "@@type": "MyCustomType",
+  }
+
+  t.equal(
+    getType(CustomType),
+    "MyCustomType",
+    "given an object with an '@@type' property should return the value"
+  )
+
+  const CustomTypeGetter = {
+    get [Symbol.toStringTag]() { return "MyCustomTypeGetter" },
+  }
+
+  t.equal(
+    getType(CustomTypeGetter),
+    "MyCustomTypeGetter",
+    "given an object with a `[Symbol.toStringTag]()` getter should return its value"
+  )
+
+  const CustomTypePlusGetter = {
+    "@@type": "MyCustomTypePlusGetter",
+    get [Symbol.toStringTag]() { return "NotGonnaBeMe" },
+  }
+
+  t.equal(
+    getType(CustomTypePlusGetter),
+    "MyCustomTypePlusGetter",
+    "given an object with a '@@type' property and a `[Symbol.toStringTag]()` getter should return its @@type value"
+  )
+
+  const CustomGetterPlusType = {
+    get [Symbol.toStringTag]() { return "NotGonnaBeMe" },
+    "@@type": "MyCustomGetterPlusType",
+  }
+
+  t.equal(
+    getType(CustomGetterPlusType),
+    "MyCustomGetterPlusType",
+    "given an object with a `[Symbol.toStringTag]()` getter and an '@@type' property should return its @@type value"
+  )
+
+  t.plan(24)
 })
