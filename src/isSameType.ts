@@ -1,4 +1,7 @@
 import { getType } from "./getType.js"
 
-// isSameType :: a -> b -> Boolean
-export const isSameType = (a: any) => (b: any) => getType(a) === getType(b)
+interface IsSameType {
+  (a?: any): (b?: any) => boolean
+}
+
+export const isSameType: IsSameType = a => b => getType(a) === getType(b)

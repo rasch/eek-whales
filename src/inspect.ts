@@ -1,32 +1,35 @@
-import { nodeInspect } from "./nodeInspect.js"
 import { getType } from "./getType.js"
+import { nodeInspect } from "./nodeInspect.js"
 
-// inspect :: a -> String
-export const inspect = (x: any) : string => {
+interface Inspect {
+  (a?: any): string
+}
+
+export const inspect: Inspect = a => {
   // Handle nested ADTs in Node.js console.
-  if (x && typeof x[nodeInspect] === "function") {
-    return x[nodeInspect]()
+  if (a && typeof a[nodeInspect] === "function") {
+    return a[nodeInspect]()
   }
 
-  if (x === null) return String(null)
+  if (a === null) return String(null)
 
-  switch (getType(x)) {
+  switch (getType(a)) {
     case "Function":
-      return x.name || x.toString()
+      return a.name || a.toString()
     case "String":
-      return `"${x}"`
+      return `"${a}"`
     case "Array":
-      return `[${x.map(inspect).join(", ")}]`
+      return `[${a.map(inspect).join(", ")}]`
     case "Object":
-      return `{${Object.keys(x)
-        .map(k => [/\s/.test(k) ? `"${k}"` : k, inspect(x[k])])
+      return `{${Object.keys(a)
+        .map(k => [/\s/.test(k) ? `"${k}"` : k, inspect(a[k])])
         .map(k => k.join(": "))
         .join(", ")}}`
     case "Map":
-      return `Map(${inspect([...x])})`
+      return `Map(${inspect([...a])})`
     case "Set":
-      return `Set(${inspect([...x])})`
+      return `Set(${inspect([...a])})`
     default:
-      return String(x)
+      return String(a)
   }
 }

@@ -1,6 +1,9 @@
-import { isNil } from "./isNil.js"
 import { isFunction } from "./isFunction.js"
+import { isNil } from "./isNil.js"
 
-// isIterable :: a -> Boolean
-export const isIterable = (a?: any) : boolean =>
+interface IsIterable {
+  (a?: any): boolean
+}
+
+export const isIterable: IsIterable = a =>
   !isNil(a) && isFunction(a[Symbol.iterator])

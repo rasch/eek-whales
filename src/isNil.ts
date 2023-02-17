@@ -1,2 +1,5 @@
-// isNil :: a -> Boolean
-export const isNil = (a: any) : boolean => a == null || a !== a
+interface IsNil {
+  (a?: any): boolean
+}
+
+export const isNil: IsNil = a => a == null || a !== a

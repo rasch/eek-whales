@@ -1,4 +1,7 @@
 import { getType } from "./getType.js"
 
-// is :: String -> a -> Boolean
-export const is = (t: string) => (x?: any) : boolean => getType(x) === t
+interface Is {
+  (type: string): (a?: any) => boolean
+}
+
+export const is: Is = type => a => getType(a) === type

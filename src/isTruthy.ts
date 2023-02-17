@@ -1,2 +1,5 @@
-// isTruthy :: a -> Boolean
-export const isTruthy = (a?: any) : boolean => !!a
+interface IsTruthy {
+  (a?: any): boolean
+}
+
+export const isTruthy: IsTruthy = a => !!a

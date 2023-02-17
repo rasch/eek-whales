@@ -1,21 +1,21 @@
+import { getType } from "./getType.js"
 import { isDate } from "./isDate.js"
 import { isFunction } from "./isFunction.js"
 import { isIterable } from "./isIterable.js"
 import { isSame } from "./isSame.js"
 import { isSameType } from "./isSameType.js"
 import { isSetoid } from "./isSetoid.js"
-import { getType } from "./getType.js"
 
 type Setoid =
   | { "fantasy-land/equals": (b: Setoid) => boolean }
   | { equals: (b: Setoid) => boolean }
 
-interface EqualsSignatures {
+interface Equals {
   (a: Setoid): (b: Setoid) => boolean
-  (a: any): (b: any) => boolean
+  (a?: any): (b?: any) => boolean
 }
 
-export const equals: EqualsSignatures = a => b => {
+export const equals: Equals = a => b => {
   if (isSame(a)(b)) {
     return true
   }
@@ -35,8 +35,7 @@ export const equals: EqualsSignatures = a => b => {
     return false
   }
 
-  // deepEqual :: a -> b -> Boolean
-  const deepEqual: EqualsSignatures = x => y => {
+  const deepEqual: Equals = x => y => {
     if (Object.keys(x).length !== Object.keys(y).length) {
       return false
     }

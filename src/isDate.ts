@@ -1,4 +1,7 @@
 import { is } from "./is.js"
 
-// isDate :: a -> Boolean
-export const isDate = is("Date")
+interface IsDate {
+  (a?: any): boolean
+}
+
+export const isDate: IsDate = is("Date")

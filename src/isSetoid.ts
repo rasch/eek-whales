@@ -1,6 +1,9 @@
-import { isTruthy } from "./isTruthy.js"
 import { isFunction } from "./isFunction.js"
+import { isTruthy } from "./isTruthy.js"
 
-// isSetoid :: a -> Boolean
-export const isSetoid = (a?: any) : boolean =>
+interface IsSetoid {
+  (a?: any): boolean
+}
+
+export const isSetoid: IsSetoid = a =>
   isTruthy(a) && (isFunction(a.equals) || isFunction(a["fantasy-land/equals"]))
