@@ -8,7 +8,7 @@
 
 ### [Point-free Functions](#point-free-functions-1)
 
-- [equals](#equals) :: `a -> b -> Boolean`
+- [equals](#equals) :: `Setoid a => a -> a-> Boolean` or `a -> b -> Boolean`
 
 ### [Classify Functions](#classify-functions-1)
 
