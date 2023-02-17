@@ -36,8 +36,8 @@
 ### equals
 
 ```txt
-equals :: a -> b -> Boolean
 equals :: Setoid a => a -> a -> Boolean
+equals :: a -> b -> Boolean
 ```
 
 The `equals` function is useful for deep equality comparisons or for

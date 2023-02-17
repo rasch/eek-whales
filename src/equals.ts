@@ -6,8 +6,21 @@ import { isSameType } from "./isSameType.js"
 import { isSetoid } from "./isSetoid.js"
 import { getType } from "./getType.js"
 
-// equals :: a -> b -> Boolean
-export const equals = (a: any) => (b: any) : boolean => {
+interface Setoid {
+  equals: (b: Setoid) => boolean
+}
+
+interface FantasyLandSetoid {
+  "fantasy-land/equals": (b: FantasyLandSetoid) => boolean
+}
+
+interface EqualsSignatures {
+  (a: Setoid): (b: Setoid) => boolean
+  (a: FantasyLandSetoid): (b: FantasyLandSetoid) => boolean
+  (a: any): (b: any) => boolean
+}
+
+export const equals: EqualsSignatures = a => b => {
   if (isSame(a)(b)) {
     return true
   }
@@ -28,7 +41,7 @@ export const equals = (a: any) => (b: any) : boolean => {
   }
 
   // deepEqual :: a -> b -> Boolean
-  const deepEqual = (x: any) => (y: any) : boolean => {
+  const deepEqual = (x: any) => (y: any): boolean => {
     if (Object.keys(x).length !== Object.keys(y).length) {
       return false
     }
