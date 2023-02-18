@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "a collection of JS/TS modules for functional programming",
   "type": "module",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --sourcemap --dts",
+    "dev": "tsup src/index.ts --format esm --sourcemap --dts --watch",
+    "test": "tsup src/index.spec.ts --format esm --sourcemap --onSuccess 'node dist/index.spec.js'",
+    "clean": "rm -rf dist node_modules"
+  },
   "author": "Rand Schneck <i@rasch.co>",
   "license": "ISC",
   "devDependencies": {
