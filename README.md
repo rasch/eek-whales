@@ -43,7 +43,7 @@ equals :: a -> b -> Boolean
 The `equals` function is useful for deep equality comparisons or for
 comparing two values of the [`Setoid`](#issetoid) type. Returns `true`
 given two values that are deeply equal and `false` otherwise. Primitive
-values are checked using the [isSame](#issame) module. `Setoids` are
+values are checked using the [`isSame`](#issame) module. `Setoids` are
 compared using their `equals` or `fantasy-land/equals` methods.
 
 ```typescript
@@ -70,9 +70,8 @@ getType :: a -> String
 ```
 
 `getType` is a function that returns a value's type, given any value.
-The original version of this function was named `type`, but had to be
-changed when it was converted to TypeScript, to avoid using a reserved
-word.
+The original version of this function was named `type`, but was changed
+to avoid conflicts with the TypeScript keyword.
 
 ```typescript
 import { getType } from "eek-whales"
@@ -82,6 +81,19 @@ getType([1, 2, 3])          // => "Array"
 getType(42)                 // => "Number"
 getType(/^foo$/i)           // => "RegExp"
 getType(<T>(x: T): T => x)  // => "Function"
+
+// An object with a custom type
+const MyCustomType = {
+  "@@type": "CustomType",
+}
+
+// An object with a custom type using the Symbol.toStringTag
+const AnotherCustomType = {
+  get [Symbol.toStringTag]() { return "CustomType" },
+}
+
+getType(MyCustomType)       // => "CustomType"
+getType(AnotherCustomType)  // => "CustomType"
 ```
 
 ### is
@@ -90,9 +102,9 @@ getType(<T>(x: T): T => x)  // => "Function"
 is :: String -> a -> Boolean
 ```
 
-The `is` function is curried and accepts two parameters. The first
-parameter is a string that represents the type for the second parameter
-to be validated with.
+The `is` function accepts two parameters. The first is a string that
+represents the type for the second parameter to be validated against.
+Uses [`getType`](#gettype) on the second parameter for the comparison.
 
 ```typescript
 import { is } from "eek-whales"
@@ -102,6 +114,8 @@ is ("String") (42)        // => false
 is ("Array") ([1, 2, 3])  // => true
 is ("Array") ({ a: 1 })   // => false
 is ("Undefined") ()       // => true
+
+is ("Max") (Max(42).concat(Max(41)))  // => true
 ```
 
 ## Predicate Functions
@@ -178,8 +192,8 @@ isTruthy(NaN)         // => false
 isNil :: a -> Boolean
 ```
 
-`isNil` returns true given one of `null`, `undefined`, or `NaN`. All
-other values return false.
+`isNil` returns `true` given one of `null`, `undefined`, or `NaN`. All
+other values return `false`.
 
 ```typescript
 import { isNil } from "eek-whales"
@@ -199,8 +213,8 @@ isNil([])         // => false
 isFunction :: a -> Boolean
 ```
 
-`isFunction` returns true given a function or generator function. All
-other values return false.
+`isFunction` returns `true` given a function or generator function. All
+other values return `false`.
 
 ```typescript
 import { isFunction } from "eek-whales"
@@ -221,8 +235,8 @@ isFunction([])                         // => false
 isDate :: a -> Boolean
 ```
 
-`isDate` returns true given a date object. All other values return
-false.
+`isDate` returns `true` given a date object. All other values return
+`false`.
 
 ```typescript
 import { isDate } from "eek-whales"
@@ -240,8 +254,8 @@ isDate("Wed Feb 01 2023 00:00:00 GMT-0500 (Eastern Standard Time)") // => false
 isIterable :: a -> Boolean
 ```
 
-`isIterable` returns true given a value with a `Symbol.iterator` static
-method.
+`isIterable` returns `true` given a value with a `Symbol.iterator`
+static method.
 
 ```typescript
 import { isIterable } from "eek-whales"
