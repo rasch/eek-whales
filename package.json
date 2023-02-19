@@ -3,15 +3,40 @@
   "version": "0.1.0",
   "description": "a collection of JS/TS modules for functional programming",
   "type": "module",
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.js.map"
+  ],
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts src/index.spec.ts --format esm --dts --sourcemap --no-splitting --clean",
+    "build": "tsup src/index.ts --format esm --dts --sourcemap --no-splitting --clean",
     "dev": "pnpm run build --watch",
-    "test": "pnpm run build --silent --onSuccess 'node dist/index.spec.js'",
+    "lint": "tsc",
+    "test": "tsup src/index.spec.ts --format esm --no-splitting --clean --silent --onSuccess 'node dist/index.spec.js'",
     "clean": "rm -rf dist node_modules"
   },
-  "author": "Rand Schneck <i@rasch.co>",
+  "keywords": [
+    "functional",
+    "utilities",
+    "utils",
+    "fp",
+    "point-free",
+    "curried",
+    "fantasy-land",
+    "predicate",
+    "ADT",
+    "algebraic",
+    "combinator",
+    "category",
+    "lambda",
+    "calculus",
+    "monoid",
+    "setoid"
+  ],
+  "author": "Randy Schneck <i@rasch.co>",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.14.0",

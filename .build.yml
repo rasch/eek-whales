@@ -1,0 +1,31 @@
+image: alpine/latest
+packages:
+  - nodejs
+  - npm
+sources:
+  - https://git.sr.ht/~rasch/eek-whales
+environment:
+  project: eek-whales
+secrets:
+  - 2b8f0d2a-cab9-451d-b684-6b89582fb7b0 # NPM publish token
+tasks:
+  - setup: |
+      npm install --global pnpm
+      pnpm install
+  # - lint: |
+      # cd "$project"
+      # pnpm run lint
+  # - test: |
+      # cd "$project"
+      # pnpm run --silent test
+  - stop_if_not_release: |
+      cd "$project"
+      git describe --exact-match HEAD || complete-build
+  - release: |
+      cd "$project"
+      pnpm run build
+      echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' >> .npmrc
+      set +x
+      . ~/.env
+      set -x
+      npm publish --access public
