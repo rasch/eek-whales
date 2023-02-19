@@ -11,6 +11,7 @@ secrets:
 tasks:
   - setup: |
       sudo npm install --global pnpm
+      cd "$project"
       pnpm install
   # - lint: |
       # cd "$project"
