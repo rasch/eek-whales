@@ -6,9 +6,9 @@
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "scripts": {
-    "build": "tsup src/index.ts --format esm --sourcemap --dts",
-    "dev": "tsup src/index.ts --format esm --sourcemap --dts --watch",
-    "test": "tsup src/index.spec.ts --format esm --sourcemap --onSuccess 'node dist/index.spec.js'",
+    "build": "tsup src/index.ts src/index.spec.ts --format esm --dts --sourcemap --no-splitting --clean",
+    "dev": "pnpm run build --watch",
+    "test": "pnpm run build --silent --onSuccess 'node dist/index.spec.js'",
     "clean": "rm -rf dist node_modules"
   },
   "author": "Rand Schneck <i@rasch.co>",
