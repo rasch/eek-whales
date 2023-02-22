@@ -6,6 +6,10 @@
 
 ## API
 
+### [Combinators](#combinators)
+
+- [identity](#identity) :: a -> a
+
 ### [Point-free Functions](#point-free-functions-1)
 
 - [equals](#equals) :: `Setoid a => a -> a-> Boolean` or `a -> b -> Boolean`
@@ -30,6 +34,26 @@
 
 - [inspect](#inspect) :: `a -> String`
 - [nodeInspect](#nodeinspect) :: `Symbol`
+
+## Combinators
+
+### identity
+
+```txt
+identity :: a -> a
+I :: a -> a
+```
+
+This is the `identity` (`I`) combinator. It takes a value and returns
+the same value.
+
+```typescript
+import { identity, I } from "eek-whales"
+
+identity(42) // => 42
+identity("tacocat") // => "tacocat"
+I(42) // => 42
+```
 
 ## Point-free Functions
 

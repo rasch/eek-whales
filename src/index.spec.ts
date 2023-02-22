@@ -1,5 +1,6 @@
 import "./equals.spec.js"
 import "./getType.spec.js"
+import "./identity.spec.js"
 import "./inspect.spec.js"
 import "./is.spec.js"
 import "./isDate.spec.js"

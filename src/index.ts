@@ -1,3 +1,6 @@
+// Combinators
+export { identity, identity as I } from "./identity.js"
+
 // Point-free
 export { equals } from "./equals.js"
 
