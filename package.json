@@ -1,6 +1,6 @@
 {
   "name": "eek-whales",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "a collection of JS/TS modules for functional programming",
   "type": "module",
   "files": [
@@ -13,7 +13,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --sourcemap --no-splitting --clean",
-    "dev": "pnpm run build --watch",
+    "dev": "tsup src/index.ts --format esm --dts --sourcemap --no-splitting --clean --watch",
     "lint": "tsc",
     "test": "tsup src/index.spec.ts --format esm --no-splitting --clean --silent --onSuccess 'node dist/index.spec.js'",
     "clean": "rm -rf dist node_modules"
