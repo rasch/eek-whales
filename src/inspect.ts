@@ -30,6 +30,6 @@ export const inspect: Inspect = a => {
     case "Set":
       return `Set(${inspect([...a])})`
     default:
-      return String(a)
+      return Object.is(a, -0) ? "-0" : String(a)
   }
 }

@@ -21,6 +21,18 @@ test("inspect", t => {
   )
 
   t.equal(
+    inspect(-0),
+    "-0",
+    "given a negative zero should return the string '-0'"
+  )
+
+  t.equal(
+    inspect(0),
+    "0",
+    "given the number zero should return the string '0'"
+  )
+
+  t.equal(
     inspect([1, 2, 3]),
     "[1, 2, 3]",
     "given an array should return a string representation of the array"
@@ -170,5 +182,5 @@ test("inspect", t => {
     "given nested constructors with [nodeInspect] should return proper string"
   )
 
-  t.plan(27)
+  t.plan(29)
 })
