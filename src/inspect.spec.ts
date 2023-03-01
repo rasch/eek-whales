@@ -1,6 +1,5 @@
 import { test } from "fvb"
-import { inspect } from "./inspect.js"
-import { nodeInspect } from "./nodeInspect.js"
+import { inspect, nodeInspect } from "./index.js"
 
 // Set timezone explicitly for testing Date object inspection
 process.env.TZ = "America/New_York"

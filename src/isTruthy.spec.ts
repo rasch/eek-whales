@@ -1,5 +1,5 @@
 import { test } from "fvb"
-import { isTruthy } from "./isTruthy.js"
+import { isTruthy } from "./index.js"
 
 test("isTruthy", t => {
   t.equal(typeof isTruthy, "function", "is a function")

@@ -1,6 +1,5 @@
 import { test } from "fvb"
-import { inspect } from "./inspect.js"
-import { equals } from "./equals.js"
+import { equals, inspect } from "./index.js"
 
 test("equals", t => {
   t.equal(typeof equals, "function", "is a function")

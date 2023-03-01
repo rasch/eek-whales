@@ -1,5 +1,5 @@
 import { test } from "fvb"
-import { random } from "./random.js"
+import { random } from "./index.js"
 
 test("random", t => {
   t.equal(typeof random, "function", "is a function")

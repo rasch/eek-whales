@@ -1,5 +1,5 @@
 import { test } from "fvb"
-import { isSetoid } from "./isSetoid.js"
+import { isSetoid } from "./index.js"
 
 test("isSetoid", t => {
   t.equal(typeof isSetoid, "function", "is a function")

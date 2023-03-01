@@ -1,5 +1,5 @@
 import { test } from "fvb"
-import { isNil } from "./isNil.js"
+import { isNil } from "./index.js"
 
 test("isNil", t => {
   t.equal(typeof isNil, "function", "is a function")

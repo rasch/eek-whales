@@ -1,5 +1,5 @@
 import { test } from "fvb"
-import { isDate } from "./isDate.js"
+import { isDate } from "./index.js"
 
 test("isDate", t => {
   t.equal(typeof isDate, "function", "is a function")

@@ -1,5 +1,5 @@
 import { test } from "fvb"
-import { isSame } from "./isSame.js"
+import { isSame } from "./index.js"
 
 test("isSame", t => {
   t.equal(typeof isSame, "function", "is a function")

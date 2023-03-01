@@ -1,5 +1,5 @@
 import { test } from "fvb"
-import { isIterable } from "./isIterable.js"
+import { isIterable } from "./index.js"
 
 test("isIterable", t => {
   t.equal(typeof isIterable, "function", "is a function")
