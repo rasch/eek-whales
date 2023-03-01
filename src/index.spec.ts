@@ -1,3 +1,4 @@
+import "./constant.spec.js"
 import "./equals.spec.js"
 import "./getType.spec.js"
 import "./identity.spec.js"

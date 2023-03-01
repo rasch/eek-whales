@@ -9,6 +9,7 @@
 ### [Combinators](#combinators)
 
 - [identity](#identity) :: a -> a
+- [constant](#constant) :: a -> b -> a
 
 ### [Point-free Functions](#point-free-functions-1)
 
@@ -57,6 +58,22 @@ import { identity, I } from "eek-whales"
 identity(42) // => 42
 identity("tacocat") // => "tacocat"
 I(42) // => 42
+```
+
+### constant
+
+```txt
+constant :: a -> b -> a
+```
+
+This is the K (Kestrel) combinator. It takes two values and returns the
+first.
+
+```typescript
+import { constant } from "eek-whales"
+
+constant(42)(73) // => 42
+constant("Kestrel")("Identity") // => "Kestrel"
 ```
 
 ## Point-free Functions

@@ -1,5 +1,6 @@
 // Combinators
 export { identity, identity as I } from "./identity.js"
+export { constant, constant as K } from "./constant.js"
 
 // Point-free
 export { equals } from "./equals.js"
@@ -23,5 +24,4 @@ export { inspect } from "./inspect.js"
 export { nodeInspect } from "./nodeInspect.js"
 
 // Number
-
 export { random } from "./random.js"
