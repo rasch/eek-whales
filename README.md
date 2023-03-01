@@ -35,6 +35,10 @@
 - [inspect](#inspect) :: `a -> String`
 - [nodeInspect](#nodeinspect) :: `Symbol`
 
+### [Number](#number-1)
+
+- [random](#random) :: `(Number | Undefined) -> Number`
+
 ## Combinators
 
 ### identity
@@ -389,4 +393,37 @@ const Identity = x => ({
 })
 ```
 
+## Number
+
+### random
+
+```txt
+random :: (Number | Undefined) -> Number
+```
+
+A pseudorandom number generator that accepts a seed number as input for
+reproducible output. By default, the seed is the number returned by
+`Date.now()`. The returned floating point number will be between 0 and 1,
+not including 1; `[0, 1)`. The random number is generated using a
+[linear congruential generator] algorithm with the following values:
+
+| multiplier (a) | increment (c) | modulus (m)    |
+|:--------------:|:-------------:|:--------------:|
+| 1103515245     | 12345         | 2<sup>31</sup> |
+
+```typescript
+import { random } from "eek-whales"
+
+random() // => 0.0469970703125
+random() // => 0.871337890625
+random() // => 0.1737060546875
+
+random(1001001) // => 0.707733154296875
+random(1001001) // => 0.707733154296875
+
+random(0) // => 0
+random(1) // => 0.51385498046875
+```
+
 [Fantasy Land Specification]: https://github.com/fantasyland/fantasy-land
+[linear congruential generator]: https://en.wikipedia.org/wiki/Linear_congruential_generator

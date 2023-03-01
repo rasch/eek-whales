@@ -21,3 +21,7 @@ export { isSetoid } from "./isSetoid.js"
 // Showable
 export { inspect } from "./inspect.js"
 export { nodeInspect } from "./nodeInspect.js"
+
+// Number
+
+export { random } from "./random.js"
