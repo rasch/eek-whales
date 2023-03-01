@@ -2,11 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   '@types/node': ^18.14.0
+  fvb: ^0.1.0
   tsup: ^6.6.3
   typescript: ^4.9.5
 
 devDependencies:
   '@types/node': 18.14.0
+  fvb: 0.1.0
   tsup: 6.6.3_typescript@4.9.5
   typescript: 4.9.5
 
@@ -422,6 +424,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /fvb/0.1.0:
+    resolution: {integrity: sha512-6z/c/4XFJFH3zZcyAlL6dK058tDWEwBEPgKEaCEzihdgGdzHaNxcY+pqJHYb6MQKMmGTUPY8gpor+My564IKoQ==}
+    dev: true
 
   /get-stream/6.0.1:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}

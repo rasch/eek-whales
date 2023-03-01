@@ -13,12 +13,12 @@ tasks:
       sudo npm install --global pnpm
       cd "$project"
       pnpm install
-  # - lint: |
-      # cd "$project"
-      # pnpm run lint
-  # - test: |
-      # cd "$project"
-      # pnpm run --silent test
+  - lint: |
+      cd "$project"
+      pnpm run lint
+  - test: |
+      cd "$project"
+      pnpm run --silent test
   - stop_if_not_release: |
       cd "$project"
       git describe --exact-match HEAD || complete-build
