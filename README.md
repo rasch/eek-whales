@@ -22,6 +22,7 @@
 
 ### [Predicate Functions](#predicate-functions-1)
 
+- [isEqual](#isequal) :: `a -> b -> Boolean`
 - [isSame](#issame) :: `a -> b -> Boolean`
 - [isSameType](#issametype) :: `a -> b -> Boolean`
 - [isTruthy](#istruthy) :: `a -> Boolean`
@@ -164,6 +165,27 @@ is ("Max") (Max(42).concat(Max(41)))  // => true
 ```
 
 ## Predicate Functions
+
+## isEqual
+
+```txt
+isEqual :: a -> b -> Boolean
+```
+
+The `isEqual` predicate function compares two values using the strict
+equality (`===`) comparison operator with the exception of `NaN` which
+returns `true` when compared with `NaN`.
+
+```typescript
+import { isEqual } from "eek-whales"
+
+isEqual("pizza")("pizza") // => true
+isEqual(42)(42)           // => true
+isEqual(NaN)(NaN)         // => true
+isEqual({})({})           // => false
+isEqual([6])([6])         // => false
+isEqual("night")("day")   // => false
+```
 
 ### isSame
 

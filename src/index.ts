@@ -10,6 +10,7 @@ export { getType } from "./getType.js"
 export { is } from "./is.js"
 
 // Predicate
+export { isEqual } from "./isEqual.js"
 export { isSame } from "./isSame.js"
 export { isSameType } from "./isSameType.js"
 export { isTruthy } from "./isTruthy.js"
