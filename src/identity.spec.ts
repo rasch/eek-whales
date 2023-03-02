@@ -8,14 +8,14 @@ test("identity", t => {
   t.equal(identity(""), "", "given '' should return ''")
   t.equal(identity([]), [], "given [] should return []")
   t.equal(identity([0]), [0], "given [0] should return [0]")
-  t.equal(identity({a: 1}), {a: 1}, "given {a: 1} should return {a: 1}")
+  t.equal(identity({ a: 1 }), { a: 1 }, "given { a: 1 } should return { a: 1 }")
 
   t.equal(identity(NaN), NaN, "given NaN should return NaN")
 
   t.equal(
     identity(undefined),
     undefined,
-    "given undefined should return undefined"
+    "given undefined should return undefined",
   )
 
   t.equal(I("tacocat"), "tacocat", "given tacocat should return tacocat")

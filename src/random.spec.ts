@@ -17,20 +17,16 @@ test("random", t => {
   t.equal(
     random(1001001),
     0.707733154296875,
-    "given the same seed should always return the same value"
+    "given the same seed should always return the same value",
   )
 
   t.equal(
     random(42),
     0.582305908203125,
-    "given the same seed should always return the same value"
+    "given the same seed should always return the same value",
   )
 
-  t.equal(
-    random(0),
-    0,
-    "given a seed of 0 should always return 0"
-  )
+  t.equal(random(0), 0, "given a seed of 0 should always return 0")
 
   t.plan(143)
 })

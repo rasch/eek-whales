@@ -1,7 +1,6 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
-
     // Type Checking
 
     "allowUnreachableCode": false,

@@ -7,19 +7,15 @@ test("constant", t => {
   t.equal(
     constant(undefined)(),
     undefined,
-    "given undefined as the first value returns undefined"
+    "given undefined as the first value returns undefined",
   )
 
-  t.equal(
-    constant(42)(21),
-    42,
-    "given 42 as the first value returns 42"
-  )
+  t.equal(constant(42)(21), 42, "given 42 as the first value returns 42")
 
   t.equal(
     constant("")("blue"),
     "",
-    "given an empty string as the first value returns the empty string"
+    "given an empty string as the first value returns the empty string",
   )
 
   t.equal(constant("blue")("yellow"), "blue", "Always Blue!")

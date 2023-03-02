@@ -12,7 +12,7 @@ test("isNil", t => {
   // but given an array of nil values returns false
   t.notOk(
     isNil([NaN, undefined, null]),
-    "given an array with null, undefined, and NaN should return false"
+    "given an array with null, undefined, and NaN should return false",
   )
 
   // everything else should return false

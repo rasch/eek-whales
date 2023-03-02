@@ -4,29 +4,28 @@ import { isSetoid } from "./index.js"
 test("isSetoid", t => {
   t.equal(typeof isSetoid, "function", "is a function")
 
-  t.notOk(
-    isSetoid(),
-    "given no parameters should return false"
-  )
+  t.notOk(isSetoid(), "given no parameters should return false")
 
   const setoid = {
     value: 42,
-    equals(x: { value: any }) { return x.value === setoid.value }
+    equals(x: { value: any }) {
+      return x.value === setoid.value
+    },
   }
 
   t.ok(
     isSetoid(setoid),
-    "given an oject with an equals method (duck typing) should return true"
+    "given an oject with an equals method (duck typing) should return true",
   )
 
   const flSetoid = {
     value: 42,
-    "fantasy-land/equals": (x: { value: any }) => x.value === setoid.value
+    "fantasy-land/equals": (x: { value: any }) => x.value === setoid.value,
   }
 
   t.ok(
     isSetoid(flSetoid),
-    "given an oject with a 'fantasy-land/equals' method should return true"
+    "given an oject with a 'fantasy-land/equals' method should return true",
   )
 
   interface NumericSetoid {
@@ -36,12 +35,12 @@ test("isSetoid", t => {
 
   const mySetoid = (x: number) => ({
     value: x,
-    equals: (y: NumericSetoid) => x === y.value
+    equals: (y: NumericSetoid) => x === y.value,
   })
 
   t.ok(
     isSetoid(mySetoid(42)),
-    "given an object with an equals method should return true"
+    "given an object with an equals method should return true",
   )
 
   t.plan(5)
